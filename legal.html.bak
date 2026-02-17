@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARGO — Legal / 著作権・利用規約</title>
+    <link rel="icon" href="data:," />
+    <style>
+        html {
+            overflow-y: auto;
+            height: auto;
+        }
+
+        body {
+            overflow-y: auto;
+            background: #050510;
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        .legal-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px 80px;
+            color: #ccc;
+            font-family: 'Orbitron', 'Segoe UI', monospace;
+            line-height: 1.9;
+        }
+
+        .legal-container h1 {
+            font-size: 2.4rem;
+            letter-spacing: 0.8rem;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .legal-container .subtitle {
+            text-align: center;
+            font-size: 0.75rem;
+            letter-spacing: 0.4rem;
+            color: #666;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            padding-bottom: 2rem;
+        }
+
+        .legal-container h2 {
+            font-size: 1rem;
+            letter-spacing: 0.3rem;
+            color: #0ff;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+        }
+
+        .legal-container p,
+        .legal-container li {
+            font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif;
+            font-size: 0.85rem;
+            color: #bbb;
+            line-height: 2;
+        }
+
+        .legal-container ul {
+            padding-left: 1.5rem;
+        }
+
+        .legal-container li {
+            margin-bottom: 0.5rem;
+        }
+
+        .legal-container .copyright-box {
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.03);
+            padding: 24px 30px;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1rem;
+            color: #fff;
+            letter-spacing: 0.15rem;
+            line-height: 2;
+        }
+
+        .legal-container .warning {
+            border: 1px solid rgba(255, 80, 80, 0.4);
+            background: rgba(255, 0, 0, 0.04);
+            padding: 20px 24px;
+            margin: 2rem 0;
+            font-size: 0.8rem;
+            color: #e88;
+        }
+
+        .legal-container .warning strong {
+            color: #ff6666;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 12px 30px;
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            color: #0ff;
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .legal-container .section-ja {
+            margin-bottom: 1rem;
+        }
+
+        .legal-container .section-en {
+            color: #888;
+            font-size: 0.78rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VS8CV7FTJ0"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-VS8CV7FTJ0');
+</script>
+
+<body>
+    <div class="legal-container">
+        <h1>ARGO</h1>
+        <div class="subtitle">LEGAL NOTICE / 著作権・利用規約</div>
+
+        <!-- 著作権表示 -->
+        <div class="copyright-box">
+            © 2025-2026 Ryoji Nogami. All Rights Reserved.<br />
+            本ソフトウェアに関する一切の権利は Ryoji Nogami に帰属します。
+        </div>
+
+        <!-- 著作権 -->
+        <h2>第1条 — 著作権</h2>
+        <div class="section-ja">
+            <p>
+                本ウェブアプリケーション「ARGO」（以下「本ソフトウェア」）に含まれるすべてのソースコード、
+                音声合成アルゴリズム、ビジュアルデザイン、レイアウトデータ、楽曲データ、グラフィック素材、
+                テキスト、およびその他の構成要素（以下総称して「本著作物」）の著作権は、
+                <strong>Ryoji Nogami</strong>（以下「著作権者」）に帰属します。
+            </p>
+        </div>
+        <div class="section-en">
+            <p>
+                All source code, audio synthesis algorithms, visual designs, layout data, musical data,
+                graphical assets, text, and all other components (collectively, "the Work") contained in
+                this web application "ARGO" (the "Software") are the intellectual property of
+                <strong>Ryoji Nogami</strong> (the "Copyright Holder").
+            </p>
+        </div>
+
+        <!-- 禁止事項 -->
+        <h2>第2条 — 禁止事項</h2>
+        <div class="section-ja">
+            <p>著作権者の事前の書面による明示的な許可なく、以下の行為を一切禁止します：</p>
+            <ul>
+                <li>本著作物の全部または一部の複製、複写、コピー</li>
+                <li>本著作物の改変、翻案、二次的著作物の作成</li>
+                <li>本著作物の再配布、転載、転用、公衆送信</li>
+                <li>本著作物の商業的利用（販売、ライセンス供与、サービスへの組込み等）</li>
+                <li>本著作物のリバースエンジニアリング、逆コンパイル、逆アセンブル</li>
+                <li>本著作物から著作権表示やクレジットを除去・改変する行為</li>
+                <li>本著作物を自己の著作物として偽る行為（盗用・盗作）</li>
+                <li>本著作物のスクレイピング、自動取得、データマイニング</li>
+                <li>AI・機械学習モデルのトレーニングデータとしての使用</li>
+            </ul>
+        </div>
+        <div class="section-en">
+            <p>Without the prior express written permission of the Copyright Holder, the following acts are strictly
+                prohibited:</p>
+            <ul>
+                <li>Reproduction, duplication, or copying of the Work in whole or in part</li>
+                <li>Modification, adaptation, or creation of derivative works</li>
+                <li>Redistribution, republication, repurposing, or public transmission</li>
+                <li>Commercial use (including sale, licensing, or incorporation into services)</li>
+                <li>Reverse engineering, decompilation, or disassembly</li>
+                <li>Removal or alteration of copyright notices or credits</li>
+                <li>Misrepresenting the Work as one's own (plagiarism)</li>
+                <li>Scraping, automated retrieval, or data mining</li>
+                <li>Use as training data for AI or machine learning models</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <strong>⚠ 警告：</strong>
+            上記の禁止行為に違反した場合、著作権法（日本国）および国際著作権条約（ベルヌ条約等）に基づき、
+            民事上および刑事上の法的措置を講じる場合があります。<br /><br />
+            <strong>⚠ WARNING:</strong>
+            Any violation of the above prohibitions may result in civil and criminal legal action
+            under the Copyright Act of Japan and international copyright treaties (including the Berne Convention).
+        </div>
+
+        <!-- 知的財産権 -->
+        <h2>第3条 — 知的財産権</h2>
+        <div class="section-ja">
+            <p>
+                本ソフトウェアの名称「ARGO」、ロゴ、UIデザイン、音声合成方式、
+                およびビジュアル表現手法に関する一切の知的財産権は著作権者に帰属します。
+                これらは著作権法、不正競争防止法、およびその他の知的財産法により保護されています。
+            </p>
+        </div>
+        <div class="section-en">
+            <p>
+                All intellectual property rights related to the Software's name "ARGO," logos, UI design,
+                audio synthesis methods, and visual expression techniques belong to the Copyright Holder
+                and are protected under copyright law, unfair competition prevention law, and other
+                intellectual property laws.
+            </p>
+        </div>
+
+        <!-- 許可される利用 -->
+        <h2>第4条 — 許可される利用</h2>
+        <div class="section-ja">
+            <p>以下の利用のみ許可されます：</p>
+            <ul>
+                <li>個人的な閲覧・鑑賞目的での本ソフトウェアの使用</li>
+                <li>著作権者のクレジットを明示した上での、非商用の紹介・レビュー目的でのスクリーンショットの引用（引用の範囲内に限る）</li>
+            </ul>
+        </div>
+        <div class="section-en">
+            <p>Only the following uses are permitted:</p>
+            <ul>
+                <li>Personal viewing and appreciation of the Software</li>
+                <li>Quotation of screenshots for non-commercial introduction or review purposes, provided that proper
+                    credit to the Copyright Holder is clearly displayed (within the scope of fair quotation)</li>
+            </ul>
+        </div>
+
+        <!-- 免責事項 -->
+        <h2>第5条 — 免責事項</h2>
+        <div class="section-ja">
+            <p>
+                本ソフトウェアは「現状のまま」提供され、明示または黙示を問わず、
+                いかなる種類の保証もありません。著作権者は、本ソフトウェアの使用または使用不能から生じる
+                いかなる損害についても責任を負いません。
+            </p>
+        </div>
+        <div class="section-en">
+            <p>
+                The Software is provided "as is," without warranty of any kind, express or implied.
+                The Copyright Holder shall not be liable for any damages arising from the use or
+                inability to use the Software.
+            </p>
+        </div>
+
+        <!-- 準拠法 -->
+        <h2>第6条 — 準拠法・管轄</h2>
+        <div class="section-ja">
+            <p>
+                本利用規約は日本国法に準拠し、日本国法に従って解釈されるものとします。
+                本規約に関連する一切の紛争については、東京地方裁判所を第一審の専属的合意管轄裁判所とします。
+            </p>
+        </div>
+        <div class="section-en">
+            <p>
+                These terms shall be governed by and construed in accordance with the laws of Japan.
+                Any disputes arising in connection with these terms shall be subject to the exclusive
+                jurisdiction of the Tokyo District Court as the court of first instance.
+            </p>
+        </div>
+
+        <!-- 連絡先 -->
+        <h2>第7条 — お問い合わせ</h2>
+        <div class="section-ja">
+            <p>
+                本著作物の利用許諾に関するお問い合わせは、著作権者 Ryoji Nogami まで直接ご連絡ください。<br />
+                Email: <a href="mailto:argo.ryoji.nogami@gmail.com"
+                    style="color: #0ff; text-decoration: none;">argo.feeldap@gmail.com</a>
+            </p>
+        </div>
+
+        <!-- ライセンス表示 -->
+        <h2>第8条 — サードパーティライセンス</h2>
+        <div class="section-ja">
+            <p>
+                本ソフトウェアは、以下のオープンソースライブラリを含み、それぞれのライセンス条件に従って使用しています。
+            </p>
+        </div>
+        <div class="section-en">
+            <p>
+                This software includes the following open source libraries, used under their respective license terms.
+            </p>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <h3>p5.js & p5.sound</h3>
+            <div class="section-en" style="margin-top: 0.5rem;">
+                <p>
+                    Licensed under the GNU Lesser General Public License (LGPL) v2.1.<br>
+                    <a href="https://github.com/processing/p5.js/blob/main/license.txt" target="_blank"
+                        style="color: #0ff;">p5.js License</a> |
+                    <a href="https://github.com/processing/p5.js-sound/blob/main/LICENSE" target="_blank"
+                        style="color: #0ff;">p5.sound License</a>
+                </p>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 2rem;">
+            <h3>pako</h3>
+            <div class="section-en" style="margin-top: 0.5rem;">
+                <p>
+                    Licensed under the MIT License. Copyright (C) 2014-2017 by Vitaly Puzrin and Andrei Tuputcyn.<br>
+                    <a href="https://github.com/nodeca/pako/blob/master/LICENSE" target="_blank"
+                        style="color: #0ff;">pako License</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="copyright-box" style="margin-top: 3rem;">
+            ARGO © 2025-2026 Ryoji Nogami<br />
+            Unauthorized reproduction or redistribution is strictly prohibited.<br />
+            無断複製・無断転載を禁じます。
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← BACK TO ARGO</a>
+        </div>
+    </div>
+</body>
+
+</html>
