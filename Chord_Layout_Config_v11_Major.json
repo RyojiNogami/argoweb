@@ -1,0 +1,337 @@
+{
+    "version": "15.0",
+    "mode": "Major",
+    "strategy": "Circle of Fifths Angle + Harmonic Distance Rings",
+    "angleMapping": "I=90° V=60° II=30° VI=0° III=-30° VII=-60° #IV=-90° bII=-120° bVI=-150° bIII=180° bVII=150° IV=120°",
+    "rings": [
+        0,
+        3.0,
+        4.8,
+        6.6,
+        8.4
+    ],
+    "nodes": [
+        {
+            "name": "Imaj7",
+            "func": "Tonic",
+            "deg": "I",
+            "r": 0,
+            "theta": 1.571
+        },
+        {
+            "name": "V7",
+            "func": "Dominant",
+            "deg": "V",
+            "r": 3.0,
+            "theta": 1.047
+        },
+        {
+            "name": "iim7",
+            "func": "Subdominant",
+            "deg": "ii",
+            "r": 3.0,
+            "theta": 0.524
+        },
+        {
+            "name": "vim7",
+            "func": "Tonic",
+            "deg": "vi",
+            "r": 3.0,
+            "theta": 0.000
+        },
+        {
+            "name": "iiim7",
+            "func": "Tonic",
+            "deg": "iii",
+            "r": 3.0,
+            "theta": -0.524
+        },
+        {
+            "name": "IVmaj7",
+            "func": "Subdominant",
+            "deg": "IV",
+            "r": 3.0,
+            "theta": 2.094
+        },
+        {
+            "name": "viim7b5",
+            "func": "Dominant",
+            "deg": "vii",
+            "r": 3.0,
+            "theta": -1.047
+        },
+        {
+            "name": "V9",
+            "func": "Dominant",
+            "deg": "V",
+            "r": 4.8,
+            "theta": 1.047
+        },
+        {
+            "name": "I6",
+            "func": "Tonic",
+            "deg": "I",
+            "r": 4.8,
+            "theta": 1.571
+        },
+        {
+            "name": "II7",
+            "func": "Subdominant",
+            "deg": "II",
+            "r": 4.8,
+            "theta": 0.524
+        },
+        {
+            "name": "VI7",
+            "func": "Non-Diatonic",
+            "deg": "VI",
+            "r": 4.8,
+            "theta": 0.000
+        },
+        {
+            "name": "III7",
+            "func": "Non-Diatonic",
+            "deg": "III",
+            "r": 4.8,
+            "theta": -0.524
+        },
+        {
+            "name": "IV7",
+            "func": "Subdominant",
+            "deg": "IV",
+            "r": 4.8,
+            "theta": 2.094
+        },
+        {
+            "name": "vii°7",
+            "func": "Dominant",
+            "deg": "vii",
+            "r": 4.8,
+            "theta": -1.047
+        },
+        {
+            "name": "III7alt",
+            "func": "Non-Diatonic",
+            "deg": "III",
+            "r": 6.6,
+            "theta": -0.72
+        },
+        {
+            "name": "IIImMaj7",
+            "func": "Non-Diatonic",
+            "deg": "III",
+            "r": 6.6,
+            "theta": -0.52
+        },
+        {
+            "name": "VImaj7",
+            "func": "Elegant",
+            "deg": "VI",
+            "r": 6.6,
+            "theta": -0.05
+        },
+        {
+            "name": "II7alt",
+            "func": "Subdominant",
+            "deg": "II",
+            "r": 6.6,
+            "theta": 0.30
+        },
+        {
+            "name": "iim7b5",
+            "func": "Subdominant",
+            "deg": "ii",
+            "r": 6.6,
+            "theta": 0.52
+        },
+        {
+            "name": "V7sus",
+            "func": "Dominant",
+            "deg": "V",
+            "r": 6.6,
+            "theta": 1.05
+        },
+        {
+            "name": "vm7",
+            "func": "Dominant",
+            "deg": "v",
+            "r": 6.6,
+            "theta": 1.25
+        },
+        {
+            "name": "ImMaj7",
+            "func": "Tonic",
+            "deg": "I",
+            "r": 6.6,
+            "theta": 1.57
+        },
+        {
+            "name": "I7",
+            "func": "Non-Diatonic",
+            "deg": "I",
+            "r": 6.6,
+            "theta": 1.77
+        },
+        {
+            "name": "ivm7",
+            "func": "Subdominant",
+            "deg": "iv",
+            "r": 6.6,
+            "theta": 2.09
+        },
+        {
+            "name": "bVII7",
+            "func": "Non-Diatonic",
+            "deg": "bVII",
+            "r": 6.6,
+            "theta": 2.62
+        },
+        {
+            "name": "bVII7sus",
+            "func": "Dominant",
+            "deg": "bVII",
+            "r": 6.6,
+            "theta": 2.82
+        },
+        {
+            "name": "bIIImaj7",
+            "func": "Elegant",
+            "deg": "bIII",
+            "r": 6.6,
+            "theta": 3.14
+        },
+        {
+            "name": "bvim7",
+            "func": "Non-Diatonic",
+            "deg": "bvi",
+            "r": 8.4,
+            "theta": -2.778
+        },
+        {
+            "name": "bVImaj7",
+            "func": "Elegant",
+            "deg": "bVI",
+            "r": 8.4,
+            "theta": -2.618
+        },
+        {
+            "name": "bVImMaj7",
+            "func": "Non-Diatonic",
+            "deg": "bVI",
+            "r": 8.4,
+            "theta": -2.458
+        },
+        {
+            "name": "biim7",
+            "func": "Non-Diatonic",
+            "deg": "bii",
+            "r": 8.4,
+            "theta": -2.254
+        },
+        {
+            "name": "bII7",
+            "func": "Non-Diatonic",
+            "deg": "bII",
+            "r": 8.4,
+            "theta": -2.094
+        },
+        {
+            "name": "bIImMaj7",
+            "func": "Non-Diatonic",
+            "deg": "bII",
+            "r": 8.4,
+            "theta": -1.934
+        },
+        {
+            "name": "#IV7",
+            "func": "Non-Diatonic",
+            "deg": "#IV",
+            "r": 8.4,
+            "theta": -1.571
+        },
+        {
+            "name": "#ivm7",
+            "func": "Non-Diatonic",
+            "deg": "#iv",
+            "r": 8.4,
+            "theta": -1.411
+        },
+        {
+            "name": "VII7",
+            "func": "Dominant",
+            "deg": "VII",
+            "r": 8.4,
+            "theta": -1.047
+        },
+        {
+            "name": "viim7",
+            "func": "Dominant",
+            "deg": "vii",
+            "r": 8.4,
+            "theta": -0.887
+        },
+        {
+            "name": "VI7alt",
+            "func": "Non-Diatonic",
+            "deg": "VI",
+            "r": 8.4,
+            "theta": 0.000
+        },
+        {
+            "name": "V7alt",
+            "func": "Dominant",
+            "deg": "V",
+            "r": 8.4,
+            "theta": 1.047
+        },
+        {
+            "name": "I7alt",
+            "func": "Non-Diatonic",
+            "deg": "I",
+            "r": 8.4,
+            "theta": 1.571
+        },
+        {
+            "name": "im7",
+            "func": "Non-Diatonic",
+            "deg": "i",
+            "r": 8.4,
+            "theta": 1.731
+        },
+        {
+            "name": "IVmMaj7",
+            "func": "Subdominant",
+            "deg": "IV",
+            "r": 8.4,
+            "theta": 1.934
+        },
+        {
+            "name": "ivmaj7",
+            "func": "Subdominant",
+            "deg": "iv",
+            "r": 8.4,
+            "theta": 2.094
+        },
+        {
+            "name": "IVm6",
+            "func": "Subdominant",
+            "deg": "IV",
+            "r": 8.4,
+            "theta": 2.254
+        },
+        {
+            "name": "bIIImMaj7",
+            "func": "Non-Diatonic",
+            "deg": "bIII",
+            "r": 8.4,
+            "theta": 3.142
+        },
+        {
+            "name": "biiim7",
+            "func": "Non-Diatonic",
+            "deg": "biii",
+            "r": 8.4,
+            "theta": 3.302
+        }
+    ]
+}

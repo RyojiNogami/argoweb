@@ -1,0 +1,678 @@
+{
+    "Imaj7": {
+        "root": 0,
+        "intervals": [
+            0,
+            4,
+            7,
+            11
+        ],
+        "role": "Landing",
+        "shape": 6
+    },
+    "Imaj9": {
+        "root": 0,
+        "intervals": [
+            0,
+            4,
+            7,
+            11,
+            14
+        ],
+        "role": "Landing",
+        "shape": 6
+    },
+    "Imaj13": {
+        "root": 0,
+        "intervals": [
+            0,
+            4,
+            7,
+            11,
+            14,
+            21
+        ],
+        "role": "Landing",
+        "shape": 6
+    },
+    "I6": {
+        "root": 0,
+        "intervals": [
+            0,
+            4,
+            7,
+            9
+        ],
+        "role": "Landing",
+        "shape": 6
+    },
+    "I69": {
+        "root": 0,
+        "intervals": [
+            0,
+            4,
+            7,
+            9,
+            14
+        ],
+        "role": "Landing",
+        "shape": 6
+    },
+    "iim7": {
+        "root": 2,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Elegant",
+        "shape": 5
+    },
+    "iiim7": {
+        "root": 4,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Landing",
+        "shape": 5
+    },
+    "IVmaj7": {
+        "root": 5,
+        "intervals": [
+            0,
+            4,
+            7,
+            11
+        ],
+        "role": "Elegant",
+        "shape": 5
+    },
+    "V7": {
+        "root": 7,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Tension",
+        "shape": 4
+    },
+    "V9": {
+        "root": 7,
+        "intervals": [
+            0,
+            4,
+            7,
+            10,
+            14
+        ],
+        "role": "Tension",
+        "shape": 4
+    },
+    "vim7": {
+        "root": 9,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Landing",
+        "shape": 5
+    },
+    "viim7b5": {
+        "root": 11,
+        "intervals": [
+            0,
+            3,
+            6,
+            10
+        ],
+        "role": "Tension",
+        "shape": 4
+    },
+    "im7": {
+        "root": 0,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Landing",
+        "shape": 6
+    },
+    "imaj7": {
+        "root": 0,
+        "intervals": [
+            0,
+            3,
+            7,
+            11
+        ],
+        "role": "Landing",
+        "shape": 6
+    },
+    "ImMaj7": {
+        "root": 0,
+        "intervals": [
+            0,
+            3,
+            7,
+            11
+        ],
+        "role": "Landing",
+        "shape": 6
+    },
+    "iim7b5": {
+        "root": 2,
+        "intervals": [
+            0,
+            3,
+            6,
+            10
+        ],
+        "role": "Subdominant",
+        "shape": 5
+    },
+    "bIIImaj7": {
+        "root": 3,
+        "intervals": [
+            0,
+            4,
+            7,
+            11
+        ],
+        "role": "Elegant",
+        "shape": 5
+    },
+    "ivm7": {
+        "root": 5,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Subdominant",
+        "shape": 5
+    },
+    "ivmaj7": {
+        "root": 5,
+        "intervals": [
+            0,
+            3,
+            7,
+            11
+        ],
+        "role": "Subdominant",
+        "shape": 5
+    },
+    "v7": {
+        "root": 7,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 4
+    },
+    "vm7": {
+        "root": 7,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 4
+    },
+    "bVImaj7": {
+        "root": 8,
+        "intervals": [
+            0,
+            4,
+            7,
+            11
+        ],
+        "role": "Elegant",
+        "shape": 5
+    },
+    "bVII7": {
+        "root": 10,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 4
+    },
+    "I7": {
+        "root": 0,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "I7alt": {
+        "root": 0,
+        "intervals": [
+            0,
+            4,
+            8,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "bIImMaj7": {
+        "root": 1,
+        "intervals": [
+            0,
+            3,
+            7,
+            11
+        ],
+        "role": "Non-Diatonic",
+        "shape": 6
+    },
+    "bII7": {
+        "root": 1,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "biim7": {
+        "root": 1,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 5
+    },
+    "biim7b5": {
+        "root": 1,
+        "intervals": [
+            0,
+            3,
+            6,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "II7": {
+        "root": 2,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Subdominant",
+        "shape": 4
+    },
+    "II7alt": {
+        "root": 2,
+        "intervals": [
+            0,
+            4,
+            8,
+            10
+        ],
+        "role": "Subdominant",
+        "shape": 4
+    },
+    "bIII7": {
+        "root": 3,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "bIIImMaj7": {
+        "root": 3,
+        "intervals": [
+            0,
+            3,
+            7,
+            11
+        ],
+        "role": "Non-Diatonic",
+        "shape": 6
+    },
+    "biiim7": {
+        "root": 3,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 5
+    },
+    "biiim7b5": {
+        "root": 3,
+        "intervals": [
+            0,
+            3,
+            6,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "III7": {
+        "root": 4,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "III7alt": {
+        "root": 4,
+        "intervals": [
+            0,
+            4,
+            8,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "IIImMaj7": {
+        "root": 4,
+        "intervals": [
+            0,
+            3,
+            7,
+            11
+        ],
+        "role": "Non-Diatonic",
+        "shape": 6
+    },
+    "iii7": {
+        "root": 4,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 5
+    },
+    "IV7": {
+        "root": 5,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Subdominant",
+        "shape": 4
+    },
+    "IVmMaj7": {
+        "root": 5,
+        "intervals": [
+            0,
+            3,
+            7,
+            11
+        ],
+        "role": "Subdominant",
+        "shape": 5
+    },
+    "IVm6": {
+        "root": 5,
+        "intervals": [
+            0,
+            3,
+            7,
+            9
+        ],
+        "role": "Subdominant",
+        "shape": 5
+    },
+    "#IV7": {
+        "root": 6,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "#ivm7": {
+        "root": 6,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 5
+    },
+    "#ivm7b5": {
+        "root": 6,
+        "intervals": [
+            0,
+            3,
+            6,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "V7alt": {
+        "root": 7,
+        "intervals": [
+            0,
+            4,
+            8,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 4
+    },
+    "V7sus": {
+        "root": 7,
+        "intervals": [
+            0,
+            5,
+            7,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 4
+    },
+    "bVI7": {
+        "root": 8,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "bVImMaj7": {
+        "root": 8,
+        "intervals": [
+            0,
+            4,
+            7,
+            11
+        ],
+        "role": "Non-Diatonic",
+        "shape": 6
+    },
+    "bvim7": {
+        "root": 8,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 5
+    },
+    "VI7": {
+        "root": 9,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "VI7alt": {
+        "root": 9,
+        "intervals": [
+            0,
+            4,
+            8,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "VImaj7": {
+        "root": 9,
+        "intervals": [
+            0,
+            4,
+            7,
+            11
+        ],
+        "role": "Elegant",
+        "shape": 6
+    },
+    "vim7b5": {
+        "root": 9,
+        "intervals": [
+            0,
+            3,
+            6,
+            10
+        ],
+        "role": "Non-Diatonic",
+        "shape": 4
+    },
+    "bVII7sus": {
+        "root": 10,
+        "intervals": [
+            0,
+            5,
+            7,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 4
+    },
+    "bviim7": {
+        "root": 10,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 5
+    },
+    "VII7": {
+        "root": 11,
+        "intervals": [
+            0,
+            4,
+            7,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 4
+    },
+    "VII7alt": {
+        "root": 11,
+        "intervals": [
+            0,
+            4,
+            8,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 4
+    },
+    "VIImMaj7": {
+        "root": 11,
+        "intervals": [
+            0,
+            3,
+            7,
+            11
+        ],
+        "role": "Dominant",
+        "shape": 6
+    },
+    "viim7": {
+        "root": 11,
+        "intervals": [
+            0,
+            3,
+            7,
+            10
+        ],
+        "role": "Dominant",
+        "shape": 5
+    },
+    "vii°7": {
+        "root": 11,
+        "intervals": [
+            0,
+            3,
+            6,
+            9
+        ],
+        "role": "Tension",
+        "shape": 3
+    }
+}
