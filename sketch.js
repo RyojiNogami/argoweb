@@ -277,6 +277,8 @@ function setupUI() {
                     audioSystem.init();
                 }
 
+                audioSystem.playStartupSound();
+
                 isActive = true;
                 if (overlay) {
                     overlay.style.opacity = 0;
@@ -1044,7 +1046,10 @@ class RyojiEngine {
 
         this.delayActive = true;
         this.reverbActive = true;
-        this.arpActive = true;
+
+        const arpEl = document.getElementById('arp-toggle');
+        this.arpActive = arpEl ? arpEl.checked : true;
+
         this.filterActive = true;
     }
 
@@ -1327,6 +1332,31 @@ class RyojiEngine {
             const res = 0.5 + parseFloat(v) * 20;
             this.filter.res(res);
         }
+    }
+
+    playStartupSound() {
+        if (!this.filter) return;
+
+        // Deep sub-bass sweep (Ryoji style)
+        const osc = new p5.Oscillator();
+        osc.setType('sine');
+        osc.freq(60);
+        osc.disconnect();
+        osc.connect(this.filter);
+        osc.start();
+        osc.amp(0);
+
+        // Quick swell and fade
+        osc.amp(0.3, 0.05);
+        osc.freq(120, 0.1);
+
+        setTimeout(() => {
+            osc.amp(0, 0.4);
+            setTimeout(() => {
+                osc.stop();
+                osc.dispose();
+            }, 500);
+        }, 100);
     }
 }
 
