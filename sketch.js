@@ -19,8 +19,8 @@ let activeNode = null;
 let lastPlayedNode = null;
 let orbitMode = false;
 
-// Dynamic sidebar width based on screen size
-const getSidebarWidth = () => (windowWidth < 768 ? 0 : 280);
+const KEY_NAMES = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+const SIDEBAR_WIDTH = 280;
 
 // Chord library expanded for Minor Key support
 // Chord library explicity loaded from JSON
@@ -379,8 +379,7 @@ function initAllNodes() {
         nodes = [];
         particles = [];
 
-        const sbWidth = getSidebarWidth();
-        const centerX = sbWidth + (width - sbWidth) / 2;
+        const centerX = SIDEBAR_WIDTH + (width - SIDEBAR_WIDTH) / 2;
         const centerY = height / 2;
 
         // 1. Select Layout Data based on Key Mode
@@ -394,30 +393,16 @@ function initAllNodes() {
         // Calculate dynamic scale to fit all nodes on screen
         const maxR = layout.nodes.reduce((max, n) => Math.max(max, parseFloat(n.r) || 0), 0);
         const margin = 50; // px margin from edge (node radius + padding)
-        const availableW = (width - sbWidth) / 2 - margin;
+        const availableW = (width - SIDEBAR_WIDTH) / 2 - margin;
         const availableH = height / 2 - margin;
         const maxPixelRadius = Math.min(availableW, availableH);
         const scale = maxR > 0 ? maxPixelRadius / maxR : 35;
 
 
-        let nodesToCreate = layout.nodes;
-
-        // --- MOBILE OPTIMIZATION ---
-        // If width < 768, only show core functional nodes
-        if (windowWidth < 768) {
-            console.log("Mobile/Small Screen detected: Filtering nodes...");
-            nodesToCreate = nodesToCreate.filter(n => {
-                // Keep only basic functional types
-                // Map functional types to remove: Non-Diatonic, Elegant, Tension
-                // Keep: Tonic, Subdominant, Dominant
-                return ['Tonic', 'Subdominant', 'Dominant'].includes(n.func);
-            });
-        }
-
-        console.log(`Loading ${layout.mode} Layout with ${nodesToCreate.length} nodes...`);
+        console.log(`Loading ${layout.mode} Layout with ${layout.nodes.length} nodes...`);
 
         // 2. Create Nodes from JSON
-        nodesToCreate.forEach(nodeData => {
+        layout.nodes.forEach(nodeData => {
             const chordName = nodeData.name;
 
             // Find chord definition (intervals, etc)
@@ -501,9 +486,7 @@ function drawFlowField() {
     blendMode(ADD);
 
     // Central glow only (particles removed for performance)
-    // Central glow only (particles removed for performance)
-    const sbWidth = getSidebarWidth();
-    const cx = sbWidth + (width - sbWidth) / 2;
+    const cx = SIDEBAR_WIDTH + (width - SIDEBAR_WIDTH) / 2;
     const cy = height / 2;
     noStroke();
     const pulse = (sin(noiseOffset * 2) + 1) * 0.5;
@@ -519,8 +502,7 @@ function drawFlowField() {
 
 // drawClusterFrames: Kept as reference but unused
 function drawClusterFrames() {
-    const sbWidth = getSidebarWidth();
-    const centerX = sbWidth + (width - sbWidth) / 2;
+    const centerX = SIDEBAR_WIDTH + (width - SIDEBAR_WIDTH) / 2;
     const centerY = height / 2;
 
     push();
@@ -558,15 +540,14 @@ function drawClusterFrames() {
 
 // ===== GUIDE CIRCLES (Distance Rings) =====
 function drawGuideCircles() {
-    const sbWidth = getSidebarWidth();
-    const centerX = sbWidth + (width - sbWidth) / 2;
+    const centerX = SIDEBAR_WIDTH + (width - SIDEBAR_WIDTH) / 2;
     const centerY = height / 2;
     const layout = (currentScale === 'minor') ? minorLayoutData : majorLayoutData;
     const rings = layout && layout.rings ? layout.rings : [3.0, 4.8, 6.6, 8.4];
 
     const maxR = layout && layout.nodes ? layout.nodes.reduce((max, n) => Math.max(max, parseFloat(n.r) || 0), 0) : 8.4;
     const margin = 50;
-    const availableW = (width - sbWidth) / 2 - margin;
+    const availableW = (width - SIDEBAR_WIDTH) / 2 - margin;
     const availableH = height / 2 - margin;
     const maxPixelRadius = Math.min(availableW, availableH);
     const scale = maxR > 0 ? maxPixelRadius / maxR : 35;
@@ -1362,9 +1343,8 @@ function mousePressed() {
 
     if (!isActive) return;
 
-    // Interaction
-    // Ignore clicks in sidebar area (if visible)
-    if (mouseX < getSidebarWidth()) return;
+    // Don't play sound when clicking on the sidebar UI
+    if (mouseX < SIDEBAR_WIDTH) return;
 
     let nodeFound = false;
     for (let node of nodes) {

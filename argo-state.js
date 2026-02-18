@@ -306,8 +306,7 @@ let _orbitIsSounding = false;
 function _getCanvasCenter() {
     const w = typeof windowWidth !== 'undefined' ? windowWidth : window.innerWidth;
     const h = typeof windowHeight !== 'undefined' ? windowHeight : window.innerHeight;
-    // Dynamic sidebar width check matching sketch.js logic
-    const sw = (w < 768) ? 0 : (typeof SIDEBAR_WIDTH !== 'undefined' ? SIDEBAR_WIDTH : 280);
+    const sw = typeof SIDEBAR_WIDTH !== 'undefined' ? SIDEBAR_WIDTH : 280;
     return { x: sw + (w - sw) / 2, y: h / 2 };
 }
 
