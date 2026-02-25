@@ -13,13 +13,13 @@ body {
     background: #000;
     font-family: 'Orbitron', monospace;
     color: #fff;
-    touch-action: none;
     -webkit-user-select: none;
     user-select: none;
 }
 
 canvas {
     display: block;
+    touch-action: none;
 }
 
 /* COSMOS OVERLAY */
@@ -35,6 +35,9 @@ canvas {
     align-items: center;
     z-index: 1000;
     transition: opacity 0.8s ease, visibility 0.8s;
+    touch-action: auto;
+    -webkit-user-select: auto;
+    user-select: auto;
 }
 
 .cosmos-title {

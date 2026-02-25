@@ -1,11 +1,12 @@
 {
-    "version": "1.0-mobile",
+    "version": "1.2-mobile",
     "mode": "Major",
-    "strategy": "Mobile-optimized subset: Ring 0-2 only (16 nodes)",
+    "strategy": "Mobile-optimized: Ring 0-2 full + high-priority Ring 3 nodes (23 total)",
     "rings": [
         0,
         3.0,
-        4.8
+        4.8,
+        6.6
     ],
     "nodes": [
         {
@@ -105,6 +106,69 @@
             "deg": "vii",
             "r": 4.8,
             "theta": -1.047
+        },
+        {
+            "name": "V7sus",
+            "func": "Dominant",
+            "deg": "V",
+            "r": 6.6,
+            "theta": 1.05
+        },
+        {
+            "name": "bVII7",
+            "func": "Non-Diatonic",
+            "deg": "bVII",
+            "r": 6.6,
+            "theta": 2.62
+        },
+        {
+            "name": "bIIImaj7",
+            "func": "Elegant",
+            "deg": "bIII",
+            "r": 6.6,
+            "theta": 3.14
+        },
+        {
+            "name": "ivm7",
+            "func": "Subdominant",
+            "deg": "iv",
+            "r": 6.6,
+            "theta": 2.09
+        },
+        {
+            "name": "I7",
+            "func": "Non-Diatonic",
+            "deg": "I",
+            "r": 6.6,
+            "theta": 1.77
+        },
+        {
+            "name": "VImaj7",
+            "func": "Elegant",
+            "deg": "VI",
+            "r": 6.6,
+            "theta": -0.05
+        },
+        {
+            "name": "bII7",
+            "func": "Non-Diatonic",
+            "deg": "bII",
+            "r": 6.6,
+            "theta": -2.094
+        },
+        {
+            "name": "bVImaj7",
+            "func": "Elegant",
+            "deg": "bVI",
+            "r": 6.6,
+            "theta": -2.618
+        },
+        {
+            "name": "#IV7",
+            "func": "Non-Diatonic",
+            "deg": "#IV",
+            "r": 6.6,
+            "theta": -1.571
         }
     ]
 }

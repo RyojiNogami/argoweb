@@ -1125,7 +1125,8 @@ function touchStarted() {
     if (getAudioContext().state !== 'running') {
         getAudioContext().resume();
     }
-    if (!isActive) return false;
+    // Let touch events propagate to DOM elements (ENTER button, etc.) when not active
+    if (!isActive) return true;
 
     // Ignore touches on UI elements
     if (_isTouchOnUI(touches[0])) return true;
