@@ -214,7 +214,16 @@ function setupUI() {
     const overlay = document.getElementById('cosmos-overlay');
 
     if (enterBtn) {
-        enterBtn.addEventListener('click', async () => {
+        const handleEnter = async () => {
+            // FIRST: Hide overlay and activate — do this before audio (which may fail on mobile)
+            isActive = true;
+            if (overlay) {
+                overlay.style.opacity = 0;
+                overlay.style.pointerEvents = 'none';
+                setTimeout(() => overlay.style.display = 'none', 800);
+            }
+
+            // THEN: Try to start audio (may fail on some mobile browsers)
             try {
                 await userStartAudio();
                 const ctx = getAudioContext();
@@ -227,16 +236,22 @@ function setupUI() {
                     audioSystem.init();
                 }
                 audioSystem.playStartupSound();
-                isActive = true;
-                if (overlay) {
-                    overlay.style.opacity = 0;
-                    setTimeout(() => overlay.style.display = 'none', 800);
-                }
-                applyPendingAudioState();
-                console.log('✓ Active');
+                console.log('✓ Audio Active');
             } catch (e) {
-                console.error('Error starting audio:', e);
+                console.warn('Audio init deferred:', e);
             }
+
+            // Apply any pending state from URL
+            try { applyPendingAudioState(); } catch (e) { console.warn('State apply deferred:', e); }
+
+            console.log('✓ Active');
+        };
+
+        // Use both click and touchend for reliable mobile input
+        enterBtn.addEventListener('click', handleEnter);
+        enterBtn.addEventListener('touchend', (e) => {
+            e.preventDefault(); // Prevent ghost click
+            handleEnter();
         });
     }
 
