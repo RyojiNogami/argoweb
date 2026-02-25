@@ -178,10 +178,12 @@ const COLORS = {
     'Non-Diatonic': { r: 255, g: 100, b: 100 }
 };
 
+let _canvas; // Store canvas reference for direct event binding
+
 function setup() {
     try {
         console.log("Starting Mobile Setup...");
-        createCanvas(windowWidth, windowHeight);
+        _canvas = createCanvas(windowWidth, windowHeight);
         colorMode(RGB);
         textFont('monospace');
         textAlign(CENTER, CENTER);
@@ -195,6 +197,12 @@ function setup() {
 
         processData();
         setupUI();
+
+        // Attach touch listeners DIRECTLY to canvas element.
+        // This way touches on UI buttons/drawer are NOT captured.
+        _canvas.elt.addEventListener('touchstart', _canvasTouchStart, { passive: false });
+        _canvas.elt.addEventListener('touchmove', _canvasTouchMove, { passive: false });
+        _canvas.elt.addEventListener('touchend', _canvasTouchEnd, { passive: false });
 
         const hasURLState = loadStateFromURL();
         if (!hasURLState) {
@@ -255,25 +263,37 @@ function setupUI() {
         });
     }
 
-    // Drawer toggle
+    // Drawer toggle — use touchend + click for reliable mobile handling
     const drawerToggle = document.getElementById('drawer-toggle');
     const controls = document.getElementById('controls');
     const drawerOverlay = document.getElementById('drawer-overlay');
 
+    const toggleDrawer = () => {
+        controls.classList.toggle('open');
+        drawerToggle.classList.toggle('active');
+        if (drawerOverlay) drawerOverlay.classList.toggle('active');
+    };
+
     if (drawerToggle && controls) {
+        drawerToggle.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleDrawer();
+        });
         drawerToggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            controls.classList.toggle('open');
-            drawerToggle.classList.toggle('active');
-            if (drawerOverlay) drawerOverlay.classList.toggle('active');
+            // Only fire on non-touch (desktop fallback)
+            if (!('ontouchstart' in window)) toggleDrawer();
         });
     }
     if (drawerOverlay) {
-        drawerOverlay.addEventListener('click', () => {
+        const closeDrawer = () => {
             controls.classList.remove('open');
             drawerToggle.classList.remove('active');
             drawerOverlay.classList.remove('active');
-        });
+        };
+        drawerOverlay.addEventListener('touchend', (e) => { e.preventDefault(); closeDrawer(); });
+        drawerOverlay.addEventListener('click', closeDrawer);
     }
 
     const keySelect = document.getElementById('key-select');
@@ -662,8 +682,8 @@ class NeonNode {
         this.x = x;
         this.y = y;
 
-        // Larger radius for mobile touch targets
-        this.baseRadius = 30;
+        // Mobile touch targets (24px radius, 1.4x hit area in contains())
+        this.baseRadius = 24;
         this.radius = this.baseRadius;
 
         this.glow = 0;
@@ -870,8 +890,8 @@ class NeonNode {
     }
 
     contains(mx, my) {
-        // Enlarged hit area for touch (1.5x radius)
-        return dist(mx, my, this.pos.x, this.pos.y) < this.radius * 1.5;
+        // Enlarged hit area for touch (1.4x radius = ~34px effective)
+        return dist(mx, my, this.pos.x, this.pos.y) < this.radius * 1.4;
     }
 }
 
@@ -1131,24 +1151,23 @@ function midiToFreq(m) {
     return 440 * pow(2, (m - 69) / 12);
 }
 
-// ===== TOUCH / MOUSE INTERACTION =====
-// Track touch state to prevent duplicate events
+// ===== TOUCH INTERACTION (Direct Canvas Listeners) =====
+// These fire ONLY when touching the canvas, NOT when touching UI buttons.
 let _touchActive = false;
 
-function touchStarted() {
+function _canvasTouchStart(e) {
+    e.preventDefault();
     userStartAudio();
     if (getAudioContext().state !== 'running') {
         getAudioContext().resume();
     }
-    // Let touch events propagate to DOM elements (ENTER button, etc.) when not active
-    if (!isActive) return true;
-
-    // Ignore touches on UI elements
-    if (_isTouchOnUI(touches[0])) return true;
+    if (!isActive) return;
 
     _touchActive = true;
-    const tx = touches[0] ? touches[0].x : mouseX;
-    const ty = touches[0] ? touches[0].y : mouseY;
+    const touch = e.touches[0];
+    const rect = _canvas.elt.getBoundingClientRect();
+    const tx = touch.clientX - rect.left;
+    const ty = touch.clientY - rect.top;
 
     let nodeFound = false;
     for (let node of nodes) {
@@ -1162,15 +1181,16 @@ function touchStarted() {
     if (!nodeFound && lastPlayedNode) {
         handleNodePress(lastPlayedNode);
     }
-
-    return false; // Prevent default
 }
 
-function touchMoved() {
-    if (!isActive || !_touchActive) return false;
+function _canvasTouchMove(e) {
+    e.preventDefault();
+    if (!isActive || !_touchActive) return;
 
-    const tx = touches[0] ? touches[0].x : mouseX;
-    const ty = touches[0] ? touches[0].y : mouseY;
+    const touch = e.touches[0];
+    const rect = _canvas.elt.getBoundingClientRect();
+    const tx = touch.clientX - rect.left;
+    const ty = touch.clientY - rect.top;
 
     for (let node of nodes) {
         if (node.contains(tx, ty)) {
@@ -1180,27 +1200,24 @@ function touchMoved() {
             break;
         }
     }
-
-    return false;
 }
 
-function touchEnded() {
-    if (!isActive) return false;
+function _canvasTouchEnd(e) {
+    e.preventDefault();
+    if (!isActive) return;
     _touchActive = false;
     audioSystem.stopChord();
     activeNode = null;
-    return false;
 }
 
-// Fallback for desktop testing
+// ===== MOUSE (Desktop Fallback) =====
 function mousePressed() {
-    if (_touchActive) return; // Skip if touch already handled
+    if (_touchActive) return;
     userStartAudio();
     if (getAudioContext().state !== 'running') {
         getAudioContext().resume();
     }
     if (!isActive) return;
-    if (_isTouchOnUI({ x: mouseX, y: mouseY })) return;
 
     let nodeFound = false;
     for (let node of nodes) {
@@ -1217,40 +1234,19 @@ function mousePressed() {
 }
 
 function mouseDragged() {
-    if (_touchActive) return;
-    if (!isActive) return;
-
+    if (_touchActive || !isActive) return;
     for (let node of nodes) {
         if (node.contains(mouseX, mouseY)) {
-            if (activeNode !== node) {
-                handleNodePress(node);
-            }
+            if (activeNode !== node) handleNodePress(node);
             break;
         }
     }
 }
 
 function mouseReleased() {
-    if (_touchActive) return;
-    if (!isActive) return;
+    if (_touchActive || !isActive) return;
     audioSystem.stopChord();
     activeNode = null;
-}
-
-function _isTouchOnUI(touch) {
-    if (!touch) return false;
-    // Check if touch is on the drawer toggle button or controls
-    const drawerToggle = document.getElementById('drawer-toggle');
-    const controls = document.getElementById('controls');
-    if (drawerToggle) {
-        const rect = drawerToggle.getBoundingClientRect();
-        if (touch.x >= rect.left && touch.x <= rect.right && touch.y >= rect.top && touch.y <= rect.bottom) return true;
-    }
-    if (controls && controls.classList.contains('open')) {
-        const rect = controls.getBoundingClientRect();
-        if (touch.x >= rect.left && touch.x <= rect.right && touch.y >= rect.top && touch.y <= rect.bottom) return true;
-    }
-    return false;
 }
 
 function handleNodePress(node) {

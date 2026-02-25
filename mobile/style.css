@@ -17,12 +17,17 @@ body {
     user-select: none;
 }
 
+/* Canvas lives in its own layer — touch-action:none ONLY here */
 canvas {
     display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
     touch-action: none;
 }
 
-/* COSMOS OVERLAY */
+/* ===== COSMOS OVERLAY ===== */
 #cosmos-overlay {
     position: fixed;
     top: 0;
@@ -34,7 +39,7 @@ canvas {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    transition: opacity 0.8s ease, visibility 0.8s;
+    transition: opacity 0.8s ease;
     touch-action: auto;
     -webkit-user-select: auto;
     user-select: auto;
@@ -66,13 +71,16 @@ canvas {
     background: transparent;
     border: 2px solid rgba(0, 255, 255, 0.5);
     color: #0ff;
-    padding: 16px 40px;
+    padding: 16px 48px;
     font-family: inherit;
     font-size: 1rem;
     letter-spacing: 0.3rem;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .cosmos-button:active {
@@ -94,7 +102,7 @@ canvas {
     }
 }
 
-/* HUD — TOP CENTER */
+/* ===== HUD — TOP CENTER ===== */
 #hud {
     position: fixed;
     top: 0;
@@ -105,7 +113,7 @@ canvas {
     gap: 16px;
     font-size: 11px;
     letter-spacing: 1.5px;
-    z-index: 100;
+    z-index: 50;
     padding: 12px 10px 8px;
     text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
     pointer-events: none;
@@ -114,39 +122,43 @@ canvas {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
 }
 
-/* DRAWER TOGGLE BUTTON */
+/* ===== DRAWER TOGGLE BUTTON ===== */
 #drawer-toggle {
     position: fixed;
-    bottom: 16px;
+    bottom: 20px;
     right: 16px;
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    border: 1px solid rgba(0, 255, 255, 0.4);
-    background: rgba(5, 5, 15, 0.85);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    background: rgba(5, 5, 15, 0.9);
     color: #0ff;
     font-size: 22px;
-    z-index: 200;
+    z-index: 500;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: auto;
 }
 
 #drawer-toggle:active {
     transform: scale(0.92);
-    background: rgba(0, 255, 255, 0.1);
+    background: rgba(0, 255, 255, 0.15);
 }
 
 #drawer-toggle.active {
     border-color: #0ff;
-    box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
 }
 
-/* DRAWER OVERLAY */
+/* ===== DRAWER OVERLAY (dim background when open) ===== */
 #drawer-overlay {
     position: fixed;
     top: 0;
@@ -154,10 +166,11 @@ canvas {
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
-    z-index: 299;
+    z-index: 490;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+    touch-action: auto;
 }
 
 #drawer-overlay.active {
@@ -165,13 +178,13 @@ canvas {
     pointer-events: auto;
 }
 
-/* BOTTOM DRAWER CONTROLS */
+/* ===== BOTTOM DRAWER CONTROLS ===== */
 #controls {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100vw;
-    max-height: 65vh;
+    max-height: 60vh;
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -180,11 +193,13 @@ canvas {
     padding: 8px 16px 24px;
     border-top: 1px solid rgba(0, 255, 255, 0.3);
     border-radius: 20px 20px 0 0;
-    z-index: 300;
+    z-index: 500;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     transform: translateY(100%);
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    touch-action: auto;
+    pointer-events: auto;
 }
 
 #controls.open {
@@ -258,32 +273,42 @@ canvas {
     font-weight: bold;
 }
 
+/* Form elements — explicitly touchable */
 input[type=range] {
     flex: 1;
     accent-color: #0ff;
     cursor: pointer;
     background: rgba(255, 255, 255, 0.1);
-    height: 6px;
+    height: 8px;
+    touch-action: manipulation;
+    -webkit-appearance: auto;
+    appearance: auto;
 }
 
 input[type=checkbox] {
     accent-color: #0ff;
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
+    touch-action: manipulation;
+    -webkit-appearance: auto;
+    appearance: auto;
 }
 
 select {
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid #0ff;
     color: #fff;
-    padding: 8px 10px;
+    padding: 10px 12px;
     font-family: inherit;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 6px;
     width: 100%;
+    touch-action: manipulation;
+    -webkit-appearance: auto;
+    appearance: auto;
 }
 
 select:focus {
@@ -301,7 +326,7 @@ select:focus {
     font-weight: bold;
 }
 
-/* ACTION BUTTONS */
+/* ===== ACTION BUTTONS ===== */
 .ctrl-actions {
     display: flex;
     flex-direction: row;
@@ -314,7 +339,7 @@ select:focus {
     background: transparent;
     border: 1px solid rgba(0, 255, 255, 0.3);
     color: #888;
-    padding: 12px 0;
+    padding: 14px 0;
     font-family: inherit;
     font-size: 11px;
     font-weight: bold;
@@ -322,6 +347,9 @@ select:focus {
     cursor: pointer;
     transition: all 0.3s ease;
     border-radius: 6px;
+    touch-action: manipulation;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .action-btn:active {
@@ -354,7 +382,8 @@ select:focus {
     bottom: 6px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 100;
+    z-index: 40;
+    pointer-events: none;
 }
 
 #copyright-overlay a {
@@ -362,6 +391,7 @@ select:focus {
     color: rgba(255, 255, 255, 0.5);
     letter-spacing: 0.5px;
     text-decoration: none;
+    pointer-events: auto;
 }
 
 /* Scrollable sliders area */
@@ -378,10 +408,6 @@ select:focus {
     }
 
     #drawer-toggle {
-        bottom: calc(16px + env(safe-area-inset-bottom));
-    }
-
-    #copyright-overlay {
-        bottom: calc(6px + env(safe-area-inset-bottom));
+        bottom: calc(20px + env(safe-area-inset-bottom));
     }
 }
