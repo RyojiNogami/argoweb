@@ -1421,14 +1421,11 @@ function mousePressed() {
 
 function mouseDragged() {
     if (!isActive) return;
+    if (mouseX < SIDEBAR_WIDTH) return;
 
     for (let node of nodes) {
         if (node.contains(mouseX, mouseY)) {
-            // Legato Morphing: Play if different
             if (activeNode !== node) {
-                // To make it smoother/morphing, we could check if audio is already playing
-                // and maybe slide pitch or crossfade?
-                // For now, standard trigger is "morph" enough as previous fades out.
                 handleNodePress(node);
             }
             break;
@@ -1438,6 +1435,7 @@ function mouseDragged() {
 
 function mouseReleased() {
     if (!isActive) return;
+    if (mouseX < SIDEBAR_WIDTH) return;
     audioSystem.stopChord();
     activeNode = null;
 }
