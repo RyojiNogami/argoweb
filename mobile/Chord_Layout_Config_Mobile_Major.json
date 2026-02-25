@@ -1,0 +1,110 @@
+{
+    "version": "1.0-mobile",
+    "mode": "Major",
+    "strategy": "Mobile-optimized subset: Ring 0-2 only (16 nodes)",
+    "rings": [
+        0,
+        3.0,
+        4.8
+    ],
+    "nodes": [
+        {
+            "name": "Imaj7",
+            "func": "Tonic",
+            "deg": "I",
+            "r": 0,
+            "theta": 1.571
+        },
+        {
+            "name": "V7",
+            "func": "Dominant",
+            "deg": "V",
+            "r": 3.0,
+            "theta": 1.047
+        },
+        {
+            "name": "iim7",
+            "func": "Subdominant",
+            "deg": "ii",
+            "r": 3.0,
+            "theta": 0.524
+        },
+        {
+            "name": "vim7",
+            "func": "Tonic",
+            "deg": "vi",
+            "r": 3.0,
+            "theta": 0.000
+        },
+        {
+            "name": "iiim7",
+            "func": "Tonic",
+            "deg": "iii",
+            "r": 3.0,
+            "theta": -0.524
+        },
+        {
+            "name": "IVmaj7",
+            "func": "Subdominant",
+            "deg": "IV",
+            "r": 3.0,
+            "theta": 2.094
+        },
+        {
+            "name": "viim7b5",
+            "func": "Dominant",
+            "deg": "vii",
+            "r": 3.0,
+            "theta": -1.047
+        },
+        {
+            "name": "V9",
+            "func": "Dominant",
+            "deg": "V",
+            "r": 4.8,
+            "theta": 1.047
+        },
+        {
+            "name": "I6",
+            "func": "Tonic",
+            "deg": "I",
+            "r": 4.8,
+            "theta": 1.571
+        },
+        {
+            "name": "II7",
+            "func": "Subdominant",
+            "deg": "II",
+            "r": 4.8,
+            "theta": 0.524
+        },
+        {
+            "name": "VI7",
+            "func": "Non-Diatonic",
+            "deg": "VI",
+            "r": 4.8,
+            "theta": 0.000
+        },
+        {
+            "name": "III7",
+            "func": "Non-Diatonic",
+            "deg": "III",
+            "r": 4.8,
+            "theta": -0.524
+        },
+        {
+            "name": "IV7",
+            "func": "Subdominant",
+            "deg": "IV",
+            "r": 4.8,
+            "theta": 2.094
+        },
+        {
+            "name": "vii°7",
+            "func": "Dominant",
+            "deg": "vii",
+            "r": 4.8,
+            "theta": -1.047
+        }
+    ]
+}

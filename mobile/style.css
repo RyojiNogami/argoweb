@@ -1,0 +1,384 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    overflow: hidden;
+    background: #000;
+    font-family: 'Orbitron', monospace;
+    color: #fff;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+canvas {
+    display: block;
+}
+
+/* COSMOS OVERLAY */
+#cosmos-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 50%, rgba(10, 10, 30, 0.95) 0%, rgba(0, 0, 10, 0.98) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.8s ease, visibility 0.8s;
+}
+
+.cosmos-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 1rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 40px rgba(0, 255, 255, 0.6),
+        0 0 80px rgba(138, 43, 226, 0.4);
+}
+
+.cosmos-subtitle-mobile {
+    font-size: 0.7rem;
+    letter-spacing: 0.5rem;
+    color: #0ff;
+    margin-bottom: 2rem;
+    opacity: 0.6;
+}
+
+.cosmos-content {
+    text-align: center;
+    animation: cosmosFloat 3s ease-in-out infinite;
+}
+
+.cosmos-button {
+    background: transparent;
+    border: 2px solid rgba(0, 255, 255, 0.5);
+    color: #0ff;
+    padding: 16px 40px;
+    font-family: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.cosmos-button:active {
+    background: rgba(0, 255, 255, 0.15);
+    border-color: #0ff;
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.5);
+    transform: scale(0.97);
+}
+
+@keyframes cosmosFloat {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* HUD — TOP CENTER */
+#hud {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    z-index: 100;
+    padding: 12px 10px 8px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    pointer-events: none;
+    color: #fff;
+    font-weight: bold;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+}
+
+/* DRAWER TOGGLE BUTTON */
+#drawer-toggle {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 255, 255, 0.4);
+    background: rgba(5, 5, 15, 0.85);
+    color: #0ff;
+    font-size: 22px;
+    z-index: 200;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.15);
+}
+
+#drawer-toggle:active {
+    transform: scale(0.92);
+    background: rgba(0, 255, 255, 0.1);
+}
+
+#drawer-toggle.active {
+    border-color: #0ff;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+}
+
+/* DRAWER OVERLAY */
+#drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 299;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#drawer-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* BOTTOM DRAWER CONTROLS */
+#controls {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    max-height: 65vh;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: rgba(5, 5, 12, 0.97);
+    backdrop-filter: blur(20px);
+    padding: 8px 16px 24px;
+    border-top: 1px solid rgba(0, 255, 255, 0.3);
+    border-radius: 20px 20px 0 0;
+    z-index: 300;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#controls.open {
+    transform: translateY(0);
+}
+
+/* Drawer handle */
+.drawer-handle {
+    width: 40px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    margin: 4px auto 8px;
+    flex-shrink: 0;
+}
+
+/* Compact Grid for key/scale */
+.ctrl-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.ctrl-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ctrl-group:last-child {
+    border-bottom: none;
+}
+
+.ctrl-group label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #ffcc00;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(255, 204, 0, 0.4);
+}
+
+.ctrl-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 10px;
+    color: #fff;
+}
+
+.ctrl-row span:first-child {
+    min-width: 42px;
+    font-weight: bold;
+    font-size: 9px;
+}
+
+/* Toggle Grid (2x2) */
+.toggle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    color: #fff;
+    font-weight: bold;
+}
+
+input[type=range] {
+    flex: 1;
+    accent-color: #0ff;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    height: 6px;
+}
+
+input[type=checkbox] {
+    accent-color: #0ff;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+select {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #0ff;
+    color: #fff;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+}
+
+select:focus {
+    outline: none;
+    border-color: #fff;
+    background: rgba(0, 50, 50, 0.8);
+}
+
+#arp-bpm,
+#morph-time-val {
+    color: #0ff;
+    font-size: 10px;
+    min-width: 40px;
+    text-align: right;
+    font-weight: bold;
+}
+
+/* ACTION BUTTONS */
+.ctrl-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.action-btn {
+    flex: 1;
+    background: transparent;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #888;
+    padding: 12px 0;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+.action-btn:active {
+    border-color: #0ff;
+    color: #0ff;
+    background: rgba(0, 255, 255, 0.08);
+}
+
+/* Orbit params: hidden by default */
+#orbit-params {
+    display: none;
+}
+
+.orbit-active #orbit-params {
+    display: block;
+}
+
+#orbit-params .ctrl-group label {
+    color: #0ff;
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+.orbit-active #hud {
+    opacity: 0.3;
+}
+
+/* Copyright overlay */
+#copyright-overlay {
+    position: fixed;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+#copyright-overlay a {
+    font-size: 7px;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.5px;
+    text-decoration: none;
+}
+
+/* Scrollable sliders area */
+.ctrl-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Safe area padding for iOS notch */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+    #controls {
+        padding-bottom: calc(24px + env(safe-area-inset-bottom));
+    }
+
+    #drawer-toggle {
+        bottom: calc(16px + env(safe-area-inset-bottom));
+    }
+
+    #copyright-overlay {
+        bottom: calc(6px + env(safe-area-inset-bottom));
+    }
+}
