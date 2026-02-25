@@ -361,6 +361,14 @@ function setupUI() {
             if (label) label.textContent = e.target.value + 'ms';
         });
     }
+
+    const orbitOctave = document.getElementById('orbit-octave');
+    if (orbitOctave) {
+        orbitOctave.addEventListener('input', (e) => {
+            const label = document.getElementById('orbit-octave-val');
+            if (label) label.textContent = e.target.value;
+        });
+    }
 }
 
 const CLUSTER_CONFIG = {
@@ -964,12 +972,24 @@ class RyojiEngine {
         const baseOctave = 60 + octaveShift;
         const transposed = chordData.intervals.map(interval => {
             let midi = baseOctave + currentKey + chordData.root + interval;
-            if (orbitMode && typeof _calcScatterProb === 'function') {
-                const sp = _calcScatterProb();
+            if (orbitMode && typeof _orbitOctave === 'function') {
+                const octLvl = _orbitOctave();
                 const roll = Math.random();
-                if (roll < sp * 0.2) midi += 24;
-                else if (roll < sp * 0.5) midi += 12;
-                else if (roll < sp * 0.7) midi -= 12;
+                if (octLvl === 1) {
+                    if (roll < 0.10) midi += 12;
+                } else if (octLvl === 2) {
+                    if (roll < 0.08) midi += 12;
+                    else if (roll < 0.15) midi -= 12;
+                } else if (octLvl === 3) {
+                    if (roll < 0.05) midi += 24;
+                    else if (roll < 0.20) midi += 12;
+                    else if (roll < 0.30) midi -= 12;
+                } else if (octLvl >= 4) {
+                    if (roll < 0.10) midi += 24;
+                    else if (roll < 0.30) midi += 12;
+                    else if (roll < 0.45) midi -= 12;
+                    else if (roll < 0.50) midi -= 24;
+                }
             }
             return midi;
         });

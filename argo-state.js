@@ -30,6 +30,7 @@ function _orbitScatter() { return _getSlider('orbit-scatter', 35); }
 function _orbitDrift() { return _getSlider('orbit-drift', 50); }
 function _orbitGhosts() { return _getSlider('orbit-ghosts', 30); }
 function _orbitWarmth() { return _getSlider('orbit-warmth', 60); }
+function _orbitOctave() { return parseInt(_getSlider('orbit-octave', 2)); }
 
 /** Density → burst count (1-7) */
 function _calcBurstCount() {
@@ -106,6 +107,7 @@ function captureOrbitState() {
         drift: _orbitDrift(),
         ghosts: _orbitGhosts(),
         warmth: _orbitWarmth(),
+        octave: _orbitOctave(),
         fx: {
             filter: _getCheckbox('filter-toggle', true),
             delay: _getCheckbox('delay-toggle', true),
@@ -145,6 +147,11 @@ function applyOrbitState(state) {
     if (state.drift !== undefined) _setSliderVal('orbit-drift', state.drift);
     if (state.ghosts !== undefined) _setSliderVal('orbit-ghosts', state.ghosts);
     if (state.warmth !== undefined) _setSliderVal('orbit-warmth', state.warmth);
+    if (state.octave !== undefined) {
+        _setSliderVal('orbit-octave', state.octave);
+        const octLabel = document.getElementById('orbit-octave-val');
+        if (octLabel) octLabel.textContent = state.octave;
+    }
 
     // Audio FX toggles
     if (state.fx) {

@@ -365,6 +365,14 @@ function setupUI() {
             updateURL();
         });
     }
+
+    const orbitOctave = document.getElementById('orbit-octave');
+    if (orbitOctave) {
+        orbitOctave.addEventListener('input', (e) => {
+            const label = document.getElementById('orbit-octave-val');
+            if (label) label.textContent = e.target.value;
+        });
+    }
 }
 
 const CLUSTER_CONFIG = {
@@ -1116,13 +1124,30 @@ class RyojiEngine {
         const transposed = chordData.intervals.map(interval => {
             let midi = baseOctave + currentKey + chordData.root + interval;
 
-            // ORBIT: Octave scatter — probability driven by SCATTER slider
-            if (orbitMode && typeof _calcScatterProb === 'function') {
-                const sp = _calcScatterProb();
+            // ORBIT: Octave scatter — 5-level control via OCTAVE slider (0-4)
+            if (orbitMode && typeof _orbitOctave === 'function') {
+                const octLvl = _orbitOctave();
                 const roll = Math.random();
-                if (roll < sp * 0.2) midi += 24;       // +2 oct (rare, sparkle)
-                else if (roll < sp * 0.5) midi += 12;  // +1 oct (shimmer)
-                else if (roll < sp * 0.7) midi -= 12;  // -1 oct (depth)
+                if (octLvl === 1) {
+                    // Subtle: rare +1 oct
+                    if (roll < 0.10) midi += 12;
+                } else if (octLvl === 2) {
+                    // Normal: occasional ±1 oct
+                    if (roll < 0.08) midi += 12;
+                    else if (roll < 0.15) midi -= 12;
+                } else if (octLvl === 3) {
+                    // Wide: +2/+1/-1
+                    if (roll < 0.05) midi += 24;
+                    else if (roll < 0.20) midi += 12;
+                    else if (roll < 0.30) midi -= 12;
+                } else if (octLvl >= 4) {
+                    // Extreme: ±2 oct aggressively
+                    if (roll < 0.10) midi += 24;
+                    else if (roll < 0.30) midi += 12;
+                    else if (roll < 0.45) midi -= 12;
+                    else if (roll < 0.50) midi -= 24;
+                }
+                // octLvl === 0: no change
             }
 
             return midi;
