@@ -911,6 +911,7 @@ class RyojiEngine {
         this.filter = null;
         this.compressor = null;
         this.oscillators = [];
+        this.keepAliveOsc = null;
         this.arpLoop = null;
         this.arpSpeed = 220;
         this.morphTime = 0.5;
@@ -923,6 +924,7 @@ class RyojiEngine {
 
     init() {
         console.log('Initializing Audio System...');
+        if (this.keepAliveOsc) { try { this.keepAliveOsc.stop(); this.keepAliveOsc.dispose(); } catch (e) { } }
         if (this.filter) { try { this.filter.disconnect(); } catch (e) { } }
         if (this.delay) { try { this.delay.disconnect(); } catch (e) { } }
         if (this.reverb) { try { this.reverb.disconnect(); } catch (e) { } }
@@ -943,8 +945,56 @@ class RyojiEngine {
         this.delay.drywet(0.4);
         this.reverb.drywet(0.5);
 
+        // Android fix: Connect filter directly to destination as well (dry path).
+        // This ensures the audio signal always reaches AudioContext.destination
+        // even if Delay/Reverb internal routing is disrupted on some Android devices.
+        try {
+            const ctx = getAudioContext();
+            this.filter.connect(ctx);
+        } catch (e) {
+            console.warn('Direct filter→destination connect failed:', e);
+        }
+
+        // Android fix: Keep-alive silent oscillator.
+        // Prevents Android from suspending AudioContext during screen recording
+        // by maintaining a continuous (inaudible) audio signal.
+        try {
+            this.keepAliveOsc = new p5.Oscillator('sine');
+            this.keepAliveOsc.freq(1); // Sub-audible frequency
+            this.keepAliveOsc.amp(0.001); // Essentially silent
+            this.keepAliveOsc.disconnect();
+            this.keepAliveOsc.connect(getAudioContext());
+            this.keepAliveOsc.start();
+            console.log('✓ Keep-alive oscillator started (Android audio fix)');
+        } catch (e) {
+            console.warn('Keep-alive oscillator failed:', e);
+        }
+
         outputVolume(0.7);
+
+        // Android fix: Listen for visibility changes (e.g. switching to recorder app)
+        // and auto-resume AudioContext.
+        this._setupVisibilityHandler();
+
         console.log('✓ Audio Chain Ready');
+    }
+
+    _setupVisibilityHandler() {
+        // Remove previous handler if re-initializing
+        if (this._visHandler) {
+            document.removeEventListener('visibilitychange', this._visHandler);
+        }
+        this._visHandler = () => {
+            if (document.visibilityState === 'visible') {
+                const ctx = getAudioContext();
+                if (ctx.state !== 'running') {
+                    ctx.resume().then(() => {
+                        console.log('✓ AudioContext resumed after visibility change');
+                    }).catch(e => console.warn('AudioContext resume failed:', e));
+                }
+            }
+        };
+        document.addEventListener('visibilitychange', this._visHandler);
     }
 
     startChord(chordData) {
@@ -1224,6 +1274,10 @@ function _canvasTouchMove(e) {
 
 function _canvasTouchEnd(e) {
     e.preventDefault();
+    // Android fix: Also resume AudioContext on touchend for extra robustness
+    if (getAudioContext().state !== 'running') {
+        getAudioContext().resume();
+    }
     if (!isActive) return;
     _touchActive = false;
     audioSystem.stopChord();
