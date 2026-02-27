@@ -337,6 +337,9 @@ function setupUI() {
     const arpToggle = document.getElementById('arp-toggle');
     if (arpToggle) arpToggle.addEventListener('change', (e) => { audioSystem.toggleArpeggio(e.target.checked); updateURL(); });
 
+    const arpMode = document.getElementById('arp-mode');
+    if (arpMode) arpMode.addEventListener('change', (e) => { audioSystem.setArpMode(e.target.value); updateURL(); });
+
     const delayDepth = document.getElementById('delay-depth');
     if (delayDepth) delayDepth.addEventListener('input', (e) => { audioSystem.setDelayDepth(e.target.value); updateURL(); });
 
@@ -1058,6 +1061,7 @@ class RyojiEngine {
 
         const arpEl = document.getElementById('arp-toggle');
         this.arpActive = arpEl ? arpEl.checked : true;
+        this.arpMode = 'up'; // 'up', 'random-fixed', 'random-free'
 
         this.filterActive = true;
     }
@@ -1265,24 +1269,33 @@ class RyojiEngine {
                 }, i * 25);
             });
         } else {
-            // Arpeggio mode — Ryoji bell-like tones
+            // Arpeggio mode
             let arpPattern;
-            if (orbitMode) {
-                // Orbit mode: random note order within the chord
+            const mode = this.arpMode;
+
+            if (mode === 'random-fixed') {
+                // Shuffle once, repeat same order
                 arpPattern = [...freqs];
                 for (let i = arpPattern.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [arpPattern[i], arpPattern[j]] = [arpPattern[j], arpPattern[i]];
                 }
             } else {
-                arpPattern = [...freqs, ...freqs.slice().reverse()];
+                // 'up' and 'random-free' both start with ascending
+                arpPattern = [...freqs];
             }
             let arpIndex = 0;
 
             this.arpLoop = setInterval(() => {
                 if (!this.filter) return;
 
-                const freq = arpPattern[arpIndex % arpPattern.length];
+                let freq;
+                if (mode === 'random-free') {
+                    // Pick a random note from the chord each time
+                    freq = freqs[Math.floor(Math.random() * freqs.length)];
+                } else {
+                    freq = arpPattern[arpIndex % arpPattern.length];
+                }
 
                 // Main sine bell
                 const osc = new p5.Oscillator();
@@ -1368,6 +1381,8 @@ class RyojiEngine {
         this.arpActive = active;
         this.stopChord();
     }
+
+    setArpMode(v) { this.arpMode = v; this.stopChord(); }
 
     setDelayDepth(v) {
         // DEPTH = how long echoes sustain (feedback amount)

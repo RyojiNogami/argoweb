@@ -335,6 +335,9 @@ function setupUI() {
     const arpToggle = document.getElementById('arp-toggle');
     if (arpToggle) arpToggle.addEventListener('change', (e) => { audioSystem.toggleArpeggio(e.target.checked); });
 
+    const arpMode = document.getElementById('arp-mode');
+    if (arpMode) arpMode.addEventListener('change', (e) => { audioSystem.setArpMode(e.target.value); });
+
     const delayDepth = document.getElementById('delay-depth');
     if (delayDepth) delayDepth.addEventListener('input', (e) => { audioSystem.setDelayDepth(e.target.value); });
 
@@ -919,6 +922,7 @@ class RyojiEngine {
         this.reverbActive = true;
         const arpEl = document.getElementById('arp-toggle');
         this.arpActive = arpEl ? arpEl.checked : true;
+        this.arpMode = 'up'; // 'up', 'random-fixed', 'random-free'
         this.filterActive = true;
     }
 
@@ -1100,21 +1104,33 @@ class RyojiEngine {
                 }, i * 25);
             });
         } else {
+            // Arpeggio mode
             let arpPattern;
-            if (orbitMode) {
+            const mode = this.arpMode;
+
+            if (mode === 'random-fixed') {
+                // Shuffle once, repeat same order
                 arpPattern = [...freqs];
                 for (let i = arpPattern.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     [arpPattern[i], arpPattern[j]] = [arpPattern[j], arpPattern[i]];
                 }
             } else {
-                arpPattern = [...freqs, ...freqs.slice().reverse()];
+                // 'up' and 'random-free' both start with ascending
+                arpPattern = [...freqs];
             }
             let arpIndex = 0;
 
             this.arpLoop = setInterval(() => {
                 if (!this.filter) return;
-                const freq = arpPattern[arpIndex % arpPattern.length];
+
+                let freq;
+                if (mode === 'random-free') {
+                    // Pick a random note from the chord each time
+                    freq = freqs[Math.floor(Math.random() * freqs.length)];
+                } else {
+                    freq = arpPattern[arpIndex % arpPattern.length];
+                }
 
                 const osc = new p5.Oscillator();
                 osc.setType('sine');
@@ -1164,6 +1180,8 @@ class RyojiEngine {
             } catch (e) { }
         });
     }
+
+    setArpMode(v) { this.arpMode = v; this.stopChord(); }
 
     toggleFilter(active) {
         this.filterActive = active;

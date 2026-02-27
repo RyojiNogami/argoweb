@@ -146,6 +146,14 @@
             <div class="ctrl-group">
                 <label>ARPEGGIO</label>
                 <div class="ctrl-row">
+                    <span>MODE</span>
+                    <select id="arp-mode">
+                        <option value="up">UP</option>
+                        <option value="random-fixed">RND FIXED</option>
+                        <option value="random-free">RND FREE</option>
+                    </select>
+                </div>
+                <div class="ctrl-row">
                     <span>SPEED</span>
                     <input type="range" id="arp-speed" min="50" max="500" step="10" value="180">
                     <span id="arp-bpm">180ms</span>
