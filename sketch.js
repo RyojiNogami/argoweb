@@ -1370,18 +1370,18 @@ class RyojiEngine {
     }
 
     setDelayDepth(v) {
-        // DEPTH = feedback amount (how long the echo sustains)
-        // 0 = no repeat, 1 = long echo tail
+        // DEPTH = how long echoes sustain (feedback amount)
+        // 0 = single echo, 1 = very long echo tail
         if (this.delay && this.delayActive) {
-            this.delay.feedback(parseFloat(v) * 0.85);
+            this.delay.feedback(parseFloat(v) * 0.95);
         }
     }
 
     setDelayTime(v) {
-        // TIME = delay interval (shorter = faster echo repetition)
-        // Maps 0-1 range to 0.05-0.8 seconds
+        // TIME = interval between echoes
+        // Maps 0-1 range to 0.05-1.0 seconds
         if (this.delay) {
-            const time = 0.05 + parseFloat(v) * 0.75;
+            const time = 0.05 + parseFloat(v) * 0.95;
             this.delay.delayTime(time);
         }
     }

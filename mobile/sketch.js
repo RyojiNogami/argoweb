@@ -1188,10 +1188,12 @@ class RyojiEngine {
     }
 
     setDelayDepth(v) {
-        if (this.delay && this.delayActive) this.delay.feedback(parseFloat(v) * 0.85);
+        // DEPTH = how long echoes sustain (feedback amount)
+        if (this.delay && this.delayActive) this.delay.feedback(parseFloat(v) * 0.95);
     }
     setDelayTime(v) {
-        if (this.delay) this.delay.delayTime(0.05 + parseFloat(v) * 0.75);
+        // TIME = interval between echoes (0.05-1.0s)
+        if (this.delay) this.delay.delayTime(0.05 + parseFloat(v) * 0.95);
     }
     setReverbDepth(v) {
         if (this.reverb && this.reverbActive) this.reverb.drywet(0.3 + parseFloat(v) * 0.6);
