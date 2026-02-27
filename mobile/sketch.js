@@ -992,6 +992,12 @@ class RyojiEngine {
                         console.log('✓ AudioContext resumed after visibility change');
                     }).catch(e => console.warn('AudioContext resume failed:', e));
                 }
+            } else {
+                // Page hidden (navigating away, switching tabs, etc.)
+                // Stop all audio to prevent sound continuing in background
+                this.stopChord();
+                if (typeof activeNode !== 'undefined') activeNode = null;
+                console.log('✓ Audio stopped on page hide');
             }
         };
         document.addEventListener('visibilitychange', this._visHandler);
@@ -1022,7 +1028,7 @@ class RyojiEngine {
         const baseOctave = 60 + octaveShift;
         const transposed = chordData.intervals.map(interval => {
             let midi = baseOctave + currentKey + chordData.root + interval;
-            if (orbitMode && typeof _orbitOctave === 'function') {
+            if (typeof _orbitOctave === 'function') {
                 const octLvl = _orbitOctave();
                 const roll = Math.random();
                 if (octLvl === 1) {
@@ -1225,6 +1231,20 @@ function midiToFreq(m) {
 // These fire ONLY when touching the canvas, NOT when touching UI buttons.
 let _touchActive = false;
 
+// Check if a touch point overlaps with any UI element (drawer, HUD, copyright, toggle btn)
+function _isTouchOverUI(clientX, clientY) {
+    const uiIds = ['controls', 'drawer-toggle', 'hud', 'copyright-overlay', 'drawer-overlay', 'cosmos-overlay'];
+    for (const id of uiIds) {
+        const el = document.getElementById(id);
+        if (!el || el.style.display === 'none') continue;
+        const r = el.getBoundingClientRect();
+        if (clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function _canvasTouchStart(e) {
     e.preventDefault();
     userStartAudio();
@@ -1233,8 +1253,11 @@ function _canvasTouchStart(e) {
     }
     if (!isActive) return;
 
-    _touchActive = true;
     const touch = e.touches[0];
+    // Ignore touches that land on UI elements
+    if (_isTouchOverUI(touch.clientX, touch.clientY)) return;
+
+    _touchActive = true;
     const rect = _canvas.elt.getBoundingClientRect();
     const tx = touch.clientX - rect.left;
     const ty = touch.clientY - rect.top;
@@ -1258,6 +1281,9 @@ function _canvasTouchMove(e) {
     if (!isActive || !_touchActive) return;
 
     const touch = e.touches[0];
+    // Stop audio if dragging into UI area
+    if (_isTouchOverUI(touch.clientX, touch.clientY)) return;
+
     const rect = _canvas.elt.getBoundingClientRect();
     const tx = touch.clientX - rect.left;
     const ty = touch.clientY - rect.top;

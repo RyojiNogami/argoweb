@@ -1138,6 +1138,12 @@ class RyojiEngine {
                         console.log('✓ AudioContext resumed after visibility change');
                     }).catch(e => console.warn('AudioContext resume failed:', e));
                 }
+            } else {
+                // Page hidden (navigating away, switching tabs, etc.)
+                // Stop all audio to prevent sound continuing in background
+                this.stopChord();
+                if (typeof activeNode !== 'undefined') activeNode = null;
+                console.log('✓ Audio stopped on page hide');
             }
         };
         document.addEventListener('visibilitychange', this._visHandler);
@@ -1173,8 +1179,8 @@ class RyojiEngine {
         const transposed = chordData.intervals.map(interval => {
             let midi = baseOctave + currentKey + chordData.root + interval;
 
-            // ORBIT: Octave scatter — 5-level control via OCTAVE slider (0-4)
-            if (orbitMode && typeof _orbitOctave === 'function') {
+            // Octave scatter — 5-level control via OCTAVE slider (0-4)
+            if (typeof _orbitOctave === 'function') {
                 const octLvl = _orbitOctave();
                 const roll = Math.random();
                 if (octLvl === 1) {
