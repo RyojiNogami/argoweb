@@ -1061,6 +1061,8 @@ class RyojiEngine {
                 setTimeout(() => {
                     if (!this.filter) return;
                     const vel = orbitMode ? (0.3 + Math.random() * 1.2) : 1.0;
+                    // Boost clarity when reverb is off
+                    const dryBoost = !this.reverbActive ? 1.5 : 1.0;
 
                     const osc1 = new p5.Oscillator();
                     osc1.setType('sine');
@@ -1069,7 +1071,7 @@ class RyojiEngine {
                     osc1.connect(this.filter);
                     osc1.start();
                     osc1.amp(0);
-                    osc1.amp(0.07 * vel, attackTime);
+                    osc1.amp(0.07 * vel * dryBoost, attackTime);
                     this.oscillators.push(osc1);
 
                     const osc2 = new p5.Oscillator();
@@ -1079,7 +1081,7 @@ class RyojiEngine {
                     osc2.connect(this.filter);
                     osc2.start();
                     osc2.amp(0);
-                    osc2.amp(0.04 * vel, attackTime * 1.2);
+                    osc2.amp(0.04 * vel * dryBoost, attackTime * 1.2);
                     this.oscillators.push(osc2);
 
                     const osc3 = new p5.Oscillator();
@@ -1089,7 +1091,7 @@ class RyojiEngine {
                     osc3.connect(this.filter);
                     osc3.start();
                     osc3.amp(0);
-                    osc3.amp(0.03 * vel, attackTime * 1.5);
+                    osc3.amp(0.03 * vel * dryBoost, attackTime * 1.5);
                     this.oscillators.push(osc3);
 
                     const osc4 = new p5.Oscillator();
@@ -1099,7 +1101,7 @@ class RyojiEngine {
                     osc4.connect(this.filter);
                     osc4.start();
                     osc4.amp(0);
-                    osc4.amp(0.015 * vel, attackTime * 2.0);
+                    osc4.amp(0.015 * vel * dryBoost, attackTime * 2.0);
                     this.oscillators.push(osc4);
                 }, i * 25);
             });
@@ -1132,6 +1134,14 @@ class RyojiEngine {
                     freq = arpPattern[arpIndex % arpPattern.length];
                 }
 
+                // Sharper envelope when reverb is off, softer when on
+                const dry = !this.reverbActive;
+                const mainAmp = dry ? 0.12 : 0.08;
+                const triAmp = dry ? 0.05 : 0.03;
+                const decayTime = dry ? 0.3 : 0.8;
+                const triDecay = dry ? 0.35 : 0.9;
+                const holdTime = dry ? 120 : 180;
+
                 const osc = new p5.Oscillator();
                 osc.setType('sine');
                 osc.freq(freq);
@@ -1139,7 +1149,7 @@ class RyojiEngine {
                 osc.connect(this.filter);
                 osc.start();
                 osc.amp(0);
-                osc.amp(0.08, 0.02);
+                osc.amp(mainAmp, 0.01);
 
                 const osc2 = new p5.Oscillator();
                 osc2.setType('triangle');
@@ -1148,16 +1158,16 @@ class RyojiEngine {
                 osc2.connect(this.filter);
                 osc2.start();
                 osc2.amp(0);
-                osc2.amp(0.03, 0.03);
+                osc2.amp(triAmp, 0.02);
 
                 setTimeout(() => {
-                    osc.amp(0, 0.8);
-                    osc2.amp(0, 0.9);
+                    osc.amp(0, decayTime);
+                    osc2.amp(0, triDecay);
                     setTimeout(() => {
                         try { osc.stop(); osc.dispose(); } catch (e) { }
                         try { osc2.stop(); osc2.dispose(); } catch (e) { }
-                    }, 950);
-                }, 180);
+                    }, (Math.max(decayTime, triDecay) + 0.15) * 1000);
+                }, holdTime);
 
                 arpIndex++;
             }, this.arpSpeed);
